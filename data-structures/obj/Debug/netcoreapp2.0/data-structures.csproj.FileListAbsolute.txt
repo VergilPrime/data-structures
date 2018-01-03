@@ -1,0 +1,8 @@
+M:\OneDrive\Documents\Projects\data-structures\data-structures\bin\Debug\netcoreapp2.0\data-structures.deps.json
+M:\OneDrive\Documents\Projects\data-structures\data-structures\bin\Debug\netcoreapp2.0\data-structures.runtimeconfig.json
+M:\OneDrive\Documents\Projects\data-structures\data-structures\bin\Debug\netcoreapp2.0\data-structures.runtimeconfig.dev.json
+M:\OneDrive\Documents\Projects\data-structures\data-structures\bin\Debug\netcoreapp2.0\data-structures.dll
+M:\OneDrive\Documents\Projects\data-structures\data-structures\obj\Debug\netcoreapp2.0\data-structures.csprojResolveAssemblyReference.cache
+M:\OneDrive\Documents\Projects\data-structures\data-structures\obj\Debug\netcoreapp2.0\data-structures.csproj.CoreCompileInputs.cache
+M:\OneDrive\Documents\Projects\data-structures\data-structures\obj\Debug\netcoreapp2.0\data-structures.AssemblyInfoInputs.cache
+M:\OneDrive\Documents\Projects\data-structures\data-structures\obj\Debug\netcoreapp2.0\data-structures.AssemblyInfo.cs
