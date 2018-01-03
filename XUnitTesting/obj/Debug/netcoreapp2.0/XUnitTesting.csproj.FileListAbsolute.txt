@@ -1,0 +1,16 @@
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\XUnitTesting.deps.json
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\XUnitTesting.runtimeconfig.json
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\XUnitTesting.runtimeconfig.dev.json
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\XUnitTesting.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\XUnitTesting.pdb
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\datastructures.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\bin\Debug\netcoreapp2.0\datastructures.pdb
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.csprojResolveAssemblyReference.cache
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.csproj.CoreCompileInputs.cache
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.AssemblyInfoInputs.cache
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.AssemblyInfo.cs
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.dll
+M:\OneDrive\Documents\Projects\data-structures\XUnitTesting\obj\Debug\netcoreapp2.0\XUnitTesting.pdb
