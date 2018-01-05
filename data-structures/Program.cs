@@ -15,7 +15,7 @@ namespace datastructures
             Console.WriteLine("Initial List Starring AddLast");
             JsonPreview(TestList);
 
-            TestList.AddBefore(0, 1);
+            TestList.AddBefore(-1, 1);
             TestList.AddAfter(11, 9);
 
             Divider();
@@ -29,17 +29,16 @@ namespace datastructures
             Divider();
 
             Console.WriteLine("AddBefore and AddAfter still.");
+
             JsonPreview(TestList);
 
-            //TestList.AddFirst(-1);
+            TestList.AddFirst(-2);
             TestList.AddLast(12);
 
             Divider();
 
-            Console.WriteLine("Suddenly AddFirst and AddLast");
+            Console.WriteLine("Suddenly AddFirst and AddLast again");
             JsonPreview(TestList);
-
-
 
         }
 

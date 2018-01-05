@@ -15,6 +15,11 @@ namespace datastructures.Classes
         {
             Node R = Head;
 
+            if(R.Value == target)
+            {
+                Head = new Node { Value = value, Next = Head };
+                R = Head.Next;
+            }
             while(R.Next != null)
             {
                 if (R.Next.Value == target)
@@ -52,29 +57,32 @@ namespace datastructures.Classes
 
         public void AddFirst(int value)
         {
-            Node N = Head;
+            Node N = new Node { Value = value, Next = Head };
 
-            Head.Value = value;
-            Head.Next = N;
+            Head = N;
         }
 
         public void AddLast(int value)
         {
-            if(Head == null)
+            if (Head == null)
             {
                 Head = new Node();
                 Head.Value = value;
-            }   
-            Node R = Head;
-
-            while(R.Next != null)
-            {
-                R = R.Next;
             }
+            else
+            {
+                Node R = Head;
 
-            R.Next = new Node();
-            R.Next.Value = value;
-        }
+                while (R.Next != null)
+                {
+                    R = R.Next;
+                }
+
+                R.Next = new Node();
+                R.Next.Value = value;
+
+            }
+            }
 
         public Node Middle()
         {
