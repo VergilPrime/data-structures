@@ -1,12 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using datastructures;
+using Newtonsoft.Json;
 
 namespace datastructures.Classes
 {
     public class LinkList
     {
         public Node Head { get; set; }
+
+        //Thanks Andre for letting me read off his stuff after I accidentally deleted mine.
+        //Thanks to Amanda as cause I had an infinite loop for a while.
+        public void AddBefore(int value, int target)
+        {
+            Node R = Head;
+
+            while(R.Next != null)
+            {
+                if (R.Next.Value == target)
+                {
+                    R.Next = new Node { Value = value , Next = R.Next};
+                    R = R.Next;
+                }
+                R = R.Next;
+            }
+
+        }
+
+        public void AddAfter(int value, int target)
+        {
+            Node R = Head;
+
+            for (int i = 0; R.Next != null; i++)
+            {
+                R = R.Next;
+                if(R.Value == target)
+                {
+                    Node N = R.Next;
+                    if (R.Next != null)
+                    {
+                        R.Next.Next = null;
+                    }
+                    R.Next = new Node
+                    {
+                        Value = value,
+                        Next = N
+                    };
+                }
+            }
+        }
+
+        public void AddFirst(int value)
+        {
+            Node N = Head;
+
+            Head.Value = value;
+            Head.Next = N;
+        }
+
+        public void AddLast(int value)
+        {
+            if(Head == null)
+            {
+                Head = new Node();
+                Head.Value = value;
+            }   
+            Node R = Head;
+
+            while(R.Next != null)
+            {
+                R = R.Next;
+            }
+
+            R.Next = new Node();
+            R.Next.Value = value;
+        }
 
         public Node Middle()
         {
