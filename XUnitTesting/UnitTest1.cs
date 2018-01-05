@@ -10,15 +10,31 @@ namespace XUnitTesting
         [Fact]
         public void TestMiddle()
         {
-            LinkList list = new LinkList();
-            list.Head = new Node(0);
-            list.Head.Next = new Node(1);
-            list.Head.Next.Next = new Node(2);
-            list.Head.Next.Next.Next = new Node(3);
-            list.Head.Next.Next.Next.Next = new Node(4);
-            list.Head.Next.Next.Next.Next.Next = new Node(5);
+            LinkList list = new LinkList
+            {
+                Head = new Node
+                {
+                    Value = 0,
+                    Next = new Node
+                    {
+                        Value = 1,
+                        Next = new Node
+                        {
+                            Value = 2
+                        }
+                    }
+                }
+            };
+
             Node testMiddle = list.Middle();
-            Assert.Equal(2, testMiddle.Value);
+            Assert.Equal(12, testMiddle.Value);
+
+            list.AddAfter(3, 1);
+            list.AddLast(4);
+
+            testMiddle = list.Middle();
+            Assert.Equal(4, testMiddle.Value);
+
 
         }
     }
