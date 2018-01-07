@@ -84,6 +84,35 @@ namespace datastructures.Classes
             }
             }
 
+        public void Remove(int value)
+        {
+            while (Head.Value == value)
+            {
+                Head = Head.Next;
+            }
+            Node R1 = Head.Next;
+            Node R2 = Head;
+            while(R1 != null)
+            {
+                if(R1.Value == value)
+                {
+                    if(R1.Next != null)
+                    {
+                        R2.Next.Value = R1.Next.Value;
+                        R2.Next.Next = R1.Next.Next;
+                    }
+                    else
+                    {
+                        R2.Next = null;
+                    }
+                    R1 = Head.Next;
+                    R2 = Head;
+                }
+                R1 = R1.Next;
+                R2 = R2.Next;
+            }
+        }
+
         public Node Middle()
         {
             Node R1 = this.Head;

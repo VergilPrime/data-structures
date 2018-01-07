@@ -38,6 +38,15 @@ namespace datastructures
             Divider();
 
             Console.WriteLine("Suddenly AddFirst and AddLast again");
+
+            JsonPreview(TestList);
+
+            TestList.Remove(-2);
+            TestList.Remove(12);
+
+            Divider();
+
+            Console.WriteLine("Oh wait nevermind");
             JsonPreview(TestList);
 
         }
