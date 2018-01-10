@@ -1,61 +1,85 @@
 ﻿using System;
 using datastructures.Classes;
 using Newtonsoft.Json;
+using datastructures.Classes.Animals;
 
 namespace datastructures
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            LinkList TestList = new LinkList();
+            int StopWatch = 0;
 
-            for(int i = 1; i < 10; i++) TestList.AddLast(i);
+            AnmlQueue Doglist = new AnmlQueue();
+            AnmlQueue Catlist = new AnmlQueue();
 
-            Console.WriteLine("Initial List Starring AddLast");
-            JsonPreview(TestList);
+            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
+            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
 
-            TestList.AddBefore(-1, 1);
-            TestList.AddAfter(11, 9);
+            //Console.WriteLine("Catlist");
+            //JsonPreview(Catlist);
+            //Console.WriteLine("Doglist");
+            //JsonPreview(Doglist);
 
-            Divider();
+            Console.Write("Type 1 = Cat. Type 2 = Dog.");
+            JsonPreview(getPet(Catlist, Doglist, 0));
+            JsonPreview(getPet(Catlist, Doglist, 2));
+            JsonPreview(getPet(Catlist, Doglist, 2));
+            JsonPreview(getPet(Catlist, Doglist, 0));
 
-            Console.WriteLine("Introducing AddBefore and AddAfter");
-            JsonPreview(TestList);
-
-            TestList.AddBefore(0, 1);
-            TestList.AddAfter(10, 9);
-
-            Divider();
-
-            Console.WriteLine("AddBefore and AddAfter still.");
-
-            JsonPreview(TestList);
-
-            TestList.AddFirst(-2);
-            TestList.AddLast(12);
-
-            Divider();
-
-            Console.WriteLine("Suddenly AddFirst and AddLast again");
-
-            JsonPreview(TestList);
-
-            TestList.Remove(-2);
-            TestList.Remove(12);
-
-            Divider();
-
-            Console.WriteLine("Oh wait nevermind");
-            JsonPreview(TestList);
+            Console.Read();
 
         }
 
-        public static void JsonPreview(LinkList input)
+        public static void JsonPreview(Anml input)
         {
             Console.WriteLine(JsonConvert.SerializeObject(input, Formatting.Indented));
 
             Console.ReadLine();
+        }
+
+        public static int addPet(AnmlQueue Catlist, AnmlQueue Doglist, int type, int StopWatch)
+        {
+            switch (type)
+            {
+                case 1:
+                    Catlist.NQ(2, StopWatch);
+                    break;
+                case 2:
+                    Doglist.NQ(1, StopWatch);
+                    break;
+            }
+            StopWatch++;
+            return StopWatch;
+        }
+
+        public static Anml getPet(AnmlQueue Catlist, AnmlQueue Doglist, int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return Catlist.DQ();
+                case 2:
+                    return Doglist.DQ();
+                case 0:
+                default:
+                    int DogDOB = Doglist.Peek().DOB;
+                    int CatDOB = Catlist.Peek().DOB;
+                    if(DogDOB < CatDOB)
+                    {
+                        return Doglist.DQ();
+                    }
+                    else
+                    {
+                        return Catlist.DQ();
+                    }
+            }
         }
 
         private static void Divider() =>
