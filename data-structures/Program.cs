@@ -2,6 +2,7 @@
 using datastructures.Classes;
 using Newtonsoft.Json;
 using datastructures.Classes.Animals;
+using System.Collections.Generic;
 
 namespace datastructures
 {
@@ -9,32 +10,42 @@ namespace datastructures
     {
         static void Main(string[] args)
         {
-            int StopWatch = 0;
+            Console.WriteLine("Success Case");
+            string input = "((({{{}}})))";
+            Console.WriteLine(ParensCheck(input));
+            Console.WriteLine();
 
-            AnmlQueue Doglist = new AnmlQueue();
-            AnmlQueue Catlist = new AnmlQueue();
-
-            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 2, StopWatch);
-            StopWatch = addPet(Catlist, Doglist, 1, StopWatch);
-
-            //Console.WriteLine("Catlist");
-            //JsonPreview(Catlist);
-            //Console.WriteLine("Doglist");
-            //JsonPreview(Doglist);
-
-            Console.Write("Type 1 = Cat. Type 2 = Dog.");
-            JsonPreview(getPet(Catlist, Doglist, 0));
-            JsonPreview(getPet(Catlist, Doglist, 2));
-            JsonPreview(getPet(Catlist, Doglist, 2));
-            JsonPreview(getPet(Catlist, Doglist, 0));
+            Console.WriteLine("Failure Case");
+            input = "(({({{}}})))";
+            Console.WriteLine(ParensCheck(input));
 
             Console.Read();
 
+
+
+        }
+
+        static bool ParensCheck(string input)
+        {
+            Stack<char> S = new Stack<char>();
+
+            for (int i = input.Length / 2; i < input.Length; i++)
+            {
+                S.Push(input[i]);
+            }
+
+            for (int i = 0; i < input.Length / 2; i++)
+            {
+                char A = input[i];
+                char B = S.Pop();
+
+                Console.WriteLine("" + A + B);
+                if ((A == '(' && B != ')' ) || ( A == '{' && B != '}'))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static void JsonPreview(Anml input)
