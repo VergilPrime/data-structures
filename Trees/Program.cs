@@ -13,48 +13,61 @@ namespace Trees
                 {
                     Left = new TreeNode()
                     {
-                        Val = "Hello"
+                        Val = 15
                     },
-                    Val = "my",
+                    Val = 123,
                     Right = new TreeNode()
                     {
-                        Val = "Name"
+                        Val = 33
                     }
                 },
-                Val = "is",
+                Val = 41,
                 Right = new TreeNode()
                 {
-                    Val = "Roger."
+                    Val = 32
                 }
             }; // End of rootBall
 
-            Console.WriteLine("Press enter to try InOrder().");
-            Console.ReadLine();
-
             rootBall.InOrder();
 
-            Console.WriteLine();
-            Console.WriteLine("Now press enter to try PreOrder().");
+            Console.WriteLine("");
+            Console.WriteLine("Maximum is " + FindMax(rootBall) + ".");
+            Console.WriteLine("Minimum is " + FindMin(rootBall) + ".");
+
             Console.ReadLine();
 
-            rootBall.PreOrder();
+        }
 
-            Console.WriteLine();
-            Console.WriteLine("Now press enter to try PostOrder().");
-            Console.ReadLine();
+        static public int FindMax(TreeNode node)
+        {
+            int Max = node.Val;
+            if(node.Left != null)
+            {
+                int LMax = FindMax(node.Left);
+                if (LMax > Max) Max = LMax;
+            }
+            if (node.Right != null)
+            {
+                int RMax = FindMax(node.Right);
+                if (RMax > Max) Max = RMax;
+            }
+            return (Max);
+        }
 
-            rootBall.PostOrder();
-
-            Console.WriteLine();
-            Console.WriteLine("Now press enter to try BreadthFirst().");
-            Console.ReadLine();
-
-            rootBall.BreadthFirst(new Queue<TreeNode>());
-
-            Console.WriteLine();
-            Console.WriteLine("Now it's all scrambled!");
-            Console.ReadLine();
-
+        static public int FindMin(TreeNode node)
+        {
+            int Min = node.Val;
+            if (node.Left != null)
+            {
+                int LMin = FindMin(node.Left);
+                if (LMin < Min) Min = LMin;
+            }
+            if (node.Right != null)
+            {
+                int RMin = FindMin(node.Right);
+                if (RMin < Min) Min = RMin;
+            }
+            return (Min);
         }
     }
 }

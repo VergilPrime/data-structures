@@ -6,7 +6,7 @@ namespace Trees
     internal class TreeNode
     {
         public TreeNode Left { get; set; }
-        public string Val { get; set; }
+        public int Val { get; set; }
         public TreeNode Right { get; set; }
 
         public void InOrder()
