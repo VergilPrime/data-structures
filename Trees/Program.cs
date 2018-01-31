@@ -31,8 +31,8 @@ namespace Trees
             rootBall.InOrder();
 
             Console.WriteLine("");
-            Console.WriteLine("Maximum is " + FindMax(rootBall) + ".");
-            Console.WriteLine("Minimum is " + FindMin(rootBall) + ".");
+            Console.WriteLine("Parent of 15 is...");
+            Console.WriteLine(findParentOf(rootBall,15).Val);
 
             Console.ReadLine();
 
@@ -68,6 +68,49 @@ namespace Trees
                 if (RMin < Min) Min = RMin;
             }
             return (Min);
+        }
+
+        static public TreeNode findParentOf(TreeNode treenode, int childval)
+        {
+            if(treenode == null)
+            {
+                return null;
+            }
+            if(treenode.Left != null)
+            {
+                if (treenode.Left.Val == childval)
+                {
+                    return treenode;
+                }
+                else
+                {
+                    TreeNode lefttry = findParentOf(treenode.Left, childval);
+                    if (lefttry != null)
+                    {
+                        return (lefttry);
+                    }
+                }
+            }
+            if(treenode.Right != null)
+            {
+                if(treenode.Right.Val == childval)
+                {
+                    return treenode;
+                }
+                else
+                {
+                    TreeNode righttry = findParentOf(treenode.Right, childval);
+                    return (righttry);
+                }
+            }
+            
+            return findParentOf(treenode.Right, childval);
+        }
+
+        static public TreeNode SwitchLeaves(TreeNode treenode,int i1, int i2)
+        {
+            TreeNode P1 = findParentOf()
+
         }
     }
 }
