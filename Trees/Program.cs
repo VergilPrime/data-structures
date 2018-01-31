@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft;
 
 namespace Trees
 {
@@ -30,9 +31,13 @@ namespace Trees
 
             rootBall.InOrder();
 
-            Console.WriteLine("");
-            Console.WriteLine("Parent of 15 is...");
-            Console.WriteLine(findParentOf(rootBall,15).Val);
+            Console.WriteLine("Tree before switch...");
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(rootBall));
+
+            rootBall = SwitchLeaves(rootBall, 32, 15);
+
+            Console.WriteLine("Tree after switch...");
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(rootBall));
 
             Console.ReadLine();
 
