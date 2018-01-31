@@ -109,8 +109,37 @@ namespace Trees
 
         static public TreeNode SwitchLeaves(TreeNode treenode,int i1, int i2)
         {
-            TreeNode P1 = findParentOf()
-
+            TreeNode P1 = findParentOf(treenode, i1);
+            TreeNode P2 = findParentOf(treenode, i2);
+            TreeNode N1;
+            TreeNode N2;
+            if(P1.Left.Val == i1)
+            {
+                N1 = P1.Left;
+            }
+            else
+            {
+                N1 = P1.Right;
+            }
+            if (P2.Left.Val == i1)
+            {
+                N2 = P2.Left;
+                P2.Left = N1;
+            }
+            else
+            {
+                N2 = P2.Right;
+                P2.Right = N1;
+            }
+            if (P1.Left.Val == i1)
+            {
+                P1.Left = N2;
+            }
+            else
+            {
+                P1.Right = N2;
+            }
+            return treenode;
         }
     }
 }
