@@ -79,5 +79,25 @@ namespace Trees
                 Q.Dequeue().BreadthFirst(Q);
             }
         }
+
+        public void AddToBST(int i)
+        {
+            if (this == null)
+            {
+                this.Val = i;
+            }
+            else if(Val == i)
+            {
+                return;
+            }
+            else if(Val > i)
+            {
+                this.Left.AddToBST(i);
+            }
+            else
+            {
+                this.Right.AddToBST(i);
+            }
+        }
     }
 }

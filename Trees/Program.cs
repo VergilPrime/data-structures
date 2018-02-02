@@ -22,8 +22,21 @@ namespace Trees
             Console.WriteLine("");
             Console.WriteLine("");
             //Console.WriteLine("Sorted that looks like:");
-            Console.WriteLine("");
+            //Console.WriteLine("");
             //ArrayToBinarySearchTree(array).BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("New tree looks like:");
+            Console.WriteLine("");
+            root = new TreeNode() { Val = 5 };
+            root.AddToBST(4);
+            root.AddToBST(1);
+            root.AddToBST(2);
+            root.AddToBST(40);
+            root.AddToBST(31);
+            root.AddToBST(7);
+            root.AddToBST(10);
+            root.AddToBST(22);
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
             Console.ReadLine();
         }
 
@@ -173,12 +186,17 @@ namespace Trees
                 L[i] = intarray[i];
                 R[i] = intarray[i + centerIndex];
             }
-            return new TreeNode()
+
+            TreeNode newnode = new TreeNode()
             {
                 Val = centerIndex,
                 Left = ArrayToBinarySearchTree(L),
                 Right = ArrayToBinarySearchTree(R)
             };
+
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(newnode));
+
+            return newnode;
         }
     }
 }
