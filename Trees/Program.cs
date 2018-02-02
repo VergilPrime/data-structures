@@ -25,7 +25,6 @@ namespace Trees
             //Console.WriteLine("");
             //ArrayToBinarySearchTree(array).BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("New tree looks like:");
-            Console.WriteLine("");
             root = new TreeNode() { Val = 5 };
             root.AddToBST(4);
             root.AddToBST(1);
@@ -37,6 +36,8 @@ namespace Trees
             root.AddToBST(22);
             Console.WriteLine("");
             root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
             Console.ReadLine();
         }
 
