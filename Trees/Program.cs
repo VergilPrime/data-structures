@@ -8,39 +8,37 @@ namespace Trees
     {
         static void Main(string[] args)
         {
-            TreeNode rootBall = new TreeNode()
-            {
-                Left = new TreeNode()
-                {
-                    Left = new TreeNode()
-                    {
-                        Val = 15
-                    },
-                    Val = 123,
-                    Right = new TreeNode()
-                    {
-                        Val = 33
-                    }
-                },
-                Val = 41,
-                Right = new TreeNode()
-                {
-                    Val = 32
-                }
-            }; // End of rootBall
+            int[] array = new int[] { 1, 2, 4, 5, 7, 10, 22, 31, 40 };
 
-            rootBall.InOrder();
+            TreeNode root = ArrayToBinaryTree(array);
 
-            Console.WriteLine("Tree before switch...");
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(rootBall));
-
-            rootBall = SwitchLeaves(rootBall, 32, 15);
-
-            Console.WriteLine("Tree after switch...");
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(rootBall));
-
+            Console.WriteLine("Tree looks like:");
+            Console.WriteLine("");
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(root));
+            Console.WriteLine("");
+            Console.WriteLine("In English that's:");
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("");
+            //Console.WriteLine("Sorted that looks like:");
+            //Console.WriteLine("");
+            //ArrayToBinarySearchTree(array).BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("New tree looks like:");
+            root = new TreeNode() { Val = 5 };
+            root.AddToBST(4);
+            root.AddToBST(1);
+            root.AddToBST(2);
+            root.AddToBST(40);
+            root.AddToBST(31);
+            root.AddToBST(7);
+            root.AddToBST(10);
+            root.AddToBST(22);
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
             Console.ReadLine();
-
         }
 
         static public int FindMax(TreeNode node)
@@ -75,7 +73,7 @@ namespace Trees
             return (Min);
         }
 
-        static public TreeNode findParentOf(TreeNode treenode, int childval)
+        static public TreeNode FindParentOf(TreeNode treenode, int childval)
         {
             if(treenode == null)
             {
@@ -89,7 +87,7 @@ namespace Trees
                 }
                 else
                 {
-                    TreeNode lefttry = findParentOf(treenode.Left, childval);
+                    TreeNode lefttry = FindParentOf(treenode.Left, childval);
                     if (lefttry != null)
                     {
                         return (lefttry);
@@ -104,18 +102,18 @@ namespace Trees
                 }
                 else
                 {
-                    TreeNode righttry = findParentOf(treenode.Right, childval);
+                    TreeNode righttry = FindParentOf(treenode.Right, childval);
                     return (righttry);
                 }
             }
             
-            return findParentOf(treenode.Right, childval);
+            return FindParentOf(treenode.Right, childval);
         }
 
         static public TreeNode SwitchLeaves(TreeNode treenode,int i1, int i2)
         {
-            TreeNode P1 = findParentOf(treenode, i1);
-            TreeNode P2 = findParentOf(treenode, i2);
+            TreeNode P1 = FindParentOf(treenode, i1);
+            TreeNode P2 = FindParentOf(treenode, i2);
             TreeNode N1;
             TreeNode N2;
             if(P1.Left.Val == i1)
@@ -145,6 +143,61 @@ namespace Trees
                 P1.Right = N2;
             }
             return treenode;
+        }
+
+        public static TreeNode ArrayToBinaryTree(int[] intarray )
+        {
+            List<TreeNode> nodelist = new List<TreeNode>();
+
+            for (int i = 0; i < intarray.Length; i++)
+            {
+                nodelist.Add(new TreeNode() { Val = intarray[i] });
+            }
+
+            for (int i = nodelist.Count - 1; i >= 0; i--)
+            {
+                int childLIndex = i * 2 + 1;
+                int childRIndex = childLIndex + 1;
+                if (childLIndex < nodelist.Count)
+                {
+                    nodelist[i].Left = nodelist[childLIndex];
+                }
+                if (childRIndex < nodelist.Count)
+                {
+                    nodelist[i].Right = nodelist[childRIndex];
+                }
+            }
+
+            return nodelist[0];
+
+        }
+
+        public static TreeNode ArrayToBinarySearchTree(int[] intarray)
+        {
+            Array.Sort(intarray);
+
+            double arraysize = intarray.Length / 2;
+
+            int centerIndex = (int)Math.Ceiling(arraysize);
+
+            int[] L = new int[centerIndex];
+            int[] R = new int[centerIndex];
+            for (int i = 0; i < centerIndex; i++)
+            {
+                L[i] = intarray[i];
+                R[i] = intarray[i + centerIndex];
+            }
+
+            TreeNode newnode = new TreeNode()
+            {
+                Val = centerIndex,
+                Left = ArrayToBinarySearchTree(L),
+                Right = ArrayToBinarySearchTree(R)
+            };
+
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(newnode));
+
+            return newnode;
         }
     }
 }

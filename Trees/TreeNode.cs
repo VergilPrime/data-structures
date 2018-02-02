@@ -11,16 +11,16 @@ namespace Trees
 
         public void InOrder()
         {
-            if(this != null)
+            if (this != null)
             {
-                if(Left != null)
+                if (Left != null)
                 {
                     Left.InOrder();
                 }
-                
+
                 Console.Write(Val + " ");
 
-                if(Right != null)
+                if (Right != null)
                 {
                     Right.InOrder();
                 }
@@ -74,9 +74,39 @@ namespace Trees
             {
                 Q.Enqueue(this.Right);
             }
-            if(Q.Count > 0)
+            if (Q.Count > 0)
             {
                 Q.Dequeue().BreadthFirst(Q);
+            }
+        }
+
+        public void AddToBST(int i)
+        {
+            if (Val == i)
+            {
+                return;
+            }
+            else if (Val > i)
+            {
+                if (Left != null)
+                {
+                    Left.AddToBST(i);
+                }
+                else
+                {
+                    Left = new TreeNode() { Val = i };
+                }
+            }
+            else
+            {
+                if (Right != null)
+                {
+                    Right.AddToBST(i);
+                }
+                else
+                {
+                    Right = new TreeNode() { Val = i };
+                }
             }
         }
     }
