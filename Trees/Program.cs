@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft;
 
 namespace Trees
@@ -38,6 +39,19 @@ namespace Trees
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
             Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
+            Console.WriteLine("");
+            Console.WriteLine("Weighted branch thing time.");
+            Console.WriteLine("");
+            foreach (int n in Enumerable.Range(1, 100))
+            {
+                if (TreeHasBranchWeight(root, 0, n))
+                {
+                    Console.WriteLine($"Root contains a branch with a weight of {n}");
+                    Console.WriteLine("");
+                }
+            }
+            Console.WriteLine("Weighted branch thing time is now over.");
+            Console.WriteLine("");
             Console.ReadLine();
         }
 
@@ -198,6 +212,30 @@ namespace Trees
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(newnode));
 
             return newnode;
+        }
+
+        public static bool TreeHasBranchWeight(TreeNode node, int weight, int checkfor)
+        {
+            weight += node.Val;
+            if(node.Left == null && node.Right == null && weight == checkfor)
+            {
+                return true;
+            }
+            if (node.Left != null)
+            {
+                if (TreeHasBranchWeight(node.Left, weight, checkfor))
+                {
+                    return true;
+                }
+            }
+            if (node.Right != null)
+            {
+                if (TreeHasBranchWeight(node.Right, weight, checkfor))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
