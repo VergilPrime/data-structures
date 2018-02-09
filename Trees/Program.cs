@@ -38,6 +38,11 @@ namespace Trees
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
             Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
+            DeleteNode(root,10);
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("And now the 10 should be missing.");
             Console.ReadLine();
         }
 
@@ -198,6 +203,77 @@ namespace Trees
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(newnode));
 
             return newnode;
+        }
+
+        static public TreeNode DeleteNode(TreeNode node, int val)
+        {
+            int head = node.Val;
+
+            TreeNode limb = FindBranch(node, val);
+
+            if(limb != null)
+            {
+                if( val <= node.Val && limb.Right != null)
+                {
+                    limb = AddBranch(limb.Left, limb.Right);
+                }
+                else if (limb.Left != null)
+                {
+                    limb = AddBranch(limb.Right, limb.Left);
+                }
+
+                node = AddBranch(limb, node);
+            }
+
+            return node;
+        }
+
+        static public TreeNode FindBranch(TreeNode node, int del)
+        {
+            if(node.Val == del){
+                return node;
+            } else if (del < node.Val)
+            {
+                if (node.Left != null)
+                {
+                    return FindBranch(node.Left, del);
+                }
+            }
+            else
+            {
+                if(node.Right != null){
+                    return FindBranch(node.Right, del);
+                }
+            }
+
+            return null;
+        }
+
+        static public TreeNode AddBranch(TreeNode newlimb, TreeNode tree)
+        {
+            if(newlimb.Val <= tree.Val)
+            {
+                if(tree.Left != null) {
+                    tree.Left = AddBranch(newlimb, tree.Left);
+                }
+                else
+                {
+                    tree.Left = newlimb;
+                }
+            }
+            else
+            {
+                if (tree.Right != null)
+                {
+                    tree.Right = AddBranch(newlimb, tree.Right);
+                }
+                else
+                {
+                    tree.Right = newlimb;
+                }
+            }
+
+            return tree;
         }
     }
 }
