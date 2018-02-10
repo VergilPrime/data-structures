@@ -205,25 +205,15 @@ namespace Trees
             return newnode;
         }
 
-        static public TreeNode DeleteNode(TreeNode node, int val)
+        static public TreeNode DeleteNode(TreeNode node, int del)
         {
-            int head = node.Val;
+            TreeNode limb = FindBranch(node, del);
 
-            TreeNode limb = FindBranch(node, val);
+            limb = AddBranch(limb.Left, limb.Right);
 
-            if(limb != null)
-            {
-                if( val <= node.Val && limb.Right != null)
-                {
-                    limb = AddBranch(limb.Left, limb.Right);
-                }
-                else if (limb.Left != null)
-                {
-                    limb = AddBranch(limb.Right, limb.Left);
-                }
+            DeleteBranch(node, del);
 
-                node = AddBranch(limb, node);
-            }
+            AddBranch(limb, node);
 
             return node;
         }
@@ -275,5 +265,31 @@ namespace Trees
 
             return tree;
         }
+
+        public static TreeNode DeleteBranch(TreeNode node, int del)
+        {
+            if(node.Val == del)
+            {
+                return null;
+            }
+            else if(del < node.Val)
+            {
+                if (node.Left != null)
+                {
+                    return DeleteBranch(node.Left, del);
+                }
+            }
+            else
+            {
+                if(node.Right != null)
+                {
+                    return DeleteBranch(node.Right, del);
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }
