@@ -38,11 +38,17 @@ namespace Trees
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
             Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
-            DeleteNode(root,10);
+            //DeleteNode(root,10);
             Console.WriteLine("");
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
             Console.WriteLine("And now the 10 should be missing.");
+            Console.WriteLine("");
+            Console.WriteLine("The total length of this tree from head to head is:");
+            Console.WriteLine("");
+            Console.WriteLine(TotalLength(root));
+            Console.WriteLine("");
+
             Console.ReadLine();
         }
 
@@ -290,6 +296,57 @@ namespace Trees
             return null;
         }
 
+        public static int TotalLength(TreeNode node)
+        {
+            int length = 1;
 
+            int leftLength = 0;
+            int rightLength = 0;
+
+            if (node.Left != null)
+            {
+                leftLength = TotalLength(node.Left, length);
+            }
+
+            if (node.Right != null)
+            {
+                rightLength = TotalLength(node.Right, length);
+            }
+
+            if (leftLength >= rightLength)
+            {
+                return (leftLength);
+            }
+            else
+            {
+                return (rightLength);
+            }
+        }
+
+        public static int TotalLength(TreeNode node, int length) {
+            length++;
+
+            int leftLength = length;
+            int rightLength = length;
+
+            if(node.Left != null)
+            {
+                leftLength = TotalLength(node.Left, length);
+            }
+
+            if(node.Right != null)
+            {
+                rightLength = TotalLength(node.Right, length);
+            }
+
+            if(leftLength >= rightLength)
+            {
+                return (leftLength);
+            }
+            else
+            {
+                return (rightLength);
+            }
+        }
     }
 }
