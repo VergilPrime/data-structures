@@ -8,46 +8,43 @@ namespace Trees
     {
         static void Main(string[] args)
         {
-            int[] array = new int[] { 1, 2, 4, 5, 7, 10, 22, 31, 40 };
+            int[] array = new int[] { 8, 12, 4, 32, 41, 14, 2, 5 };
 
             TreeNode root = ArrayToBinaryTree(array);
 
             Console.WriteLine("Tree looks like:");
             Console.WriteLine("");
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(root));
-            Console.WriteLine("");
-            Console.WriteLine("In English that's:");
-            Console.WriteLine("");
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
+            Console.WriteLine("Sorted that looks like:");
             Console.WriteLine("");
-            //Console.WriteLine("Sorted that looks like:");
+            root = ArrayToBinarySearchTree(array);
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            //Console.WriteLine("New tree looks like:");
+            //root = new TreeNode() { Val = 5 };
+            //root.AddToBST(4);
+            //root.AddToBST(1);
+            //root.AddToBST(2);
+            //root.AddToBST(40);
+            //root.AddToBST(31);
+            //root.AddToBST(7);
+            //root.AddToBST(10);
+            //root.AddToBST(22);
             //Console.WriteLine("");
-            //ArrayToBinarySearchTree(array).BreadthFirst(new Queue<TreeNode>());
-            Console.WriteLine("New tree looks like:");
-            root = new TreeNode() { Val = 5 };
-            root.AddToBST(4);
-            root.AddToBST(1);
-            root.AddToBST(2);
-            root.AddToBST(40);
-            root.AddToBST(31);
-            root.AddToBST(7);
-            root.AddToBST(10);
-            root.AddToBST(22);
-            Console.WriteLine("");
-            root.BreadthFirst(new Queue<TreeNode>());
-            Console.WriteLine("");
-            Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
-            //DeleteNode(root,10);
-            Console.WriteLine("");
-            root.BreadthFirst(new Queue<TreeNode>());
-            Console.WriteLine("");
-            Console.WriteLine("And now the 10 should be missing.");
-            Console.WriteLine("");
-            Console.WriteLine("The total length of this tree from head to head is:");
-            Console.WriteLine("");
-            Console.WriteLine(TotalLength(root));
-            Console.WriteLine("");
+            //root.BreadthFirst(new Queue<TreeNode>());
+            //Console.WriteLine("");
+            //Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
+            ////DeleteNode(root,10);
+            //Console.WriteLine("");
+            //root.BreadthFirst(new Queue<TreeNode>());
+            //Console.WriteLine("");
+            //Console.WriteLine("And now the 10 should be missing.");
+            //Console.WriteLine("");
+            //Console.WriteLine("The total length of this tree from head to head is:");
+            //Console.WriteLine("");
+            //Console.WriteLine(TotalLength(root));
+            //Console.WriteLine("");
 
             Console.ReadLine();
         }
@@ -55,7 +52,7 @@ namespace Trees
         static public int FindMax(TreeNode node)
         {
             int Max = node.Val;
-            if(node.Left != null)
+            if (node.Left != null)
             {
                 int LMax = FindMax(node.Left);
                 if (LMax > Max) Max = LMax;
@@ -86,11 +83,11 @@ namespace Trees
 
         static public TreeNode FindParentOf(TreeNode treenode, int childval)
         {
-            if(treenode == null)
+            if (treenode == null)
             {
                 return null;
             }
-            if(treenode.Left != null)
+            if (treenode.Left != null)
             {
                 if (treenode.Left.Val == childval)
                 {
@@ -105,9 +102,9 @@ namespace Trees
                     }
                 }
             }
-            if(treenode.Right != null)
+            if (treenode.Right != null)
             {
-                if(treenode.Right.Val == childval)
+                if (treenode.Right.Val == childval)
                 {
                     return treenode;
                 }
@@ -117,17 +114,17 @@ namespace Trees
                     return (righttry);
                 }
             }
-            
+
             return FindParentOf(treenode.Right, childval);
         }
 
-        static public TreeNode SwitchLeaves(TreeNode treenode,int i1, int i2)
+        static public TreeNode SwitchLeaves(TreeNode treenode, int i1, int i2)
         {
             TreeNode P1 = FindParentOf(treenode, i1);
             TreeNode P2 = FindParentOf(treenode, i2);
             TreeNode N1;
             TreeNode N2;
-            if(P1.Left.Val == i1)
+            if (P1.Left.Val == i1)
             {
                 N1 = P1.Left;
             }
@@ -156,7 +153,7 @@ namespace Trees
             return treenode;
         }
 
-        public static TreeNode ArrayToBinaryTree(int[] intarray )
+        public static TreeNode ArrayToBinaryTree(int[] intarray)
         {
             List<TreeNode> nodelist = new List<TreeNode>();
 
@@ -183,32 +180,52 @@ namespace Trees
 
         }
 
-        public static TreeNode ArrayToBinarySearchTree(int[] intarray)
+        public static TreeNode ArrayToBinarySearchTree(int[] input)
         {
-            Array.Sort(intarray);
-
-            double arraysize = intarray.Length / 2;
-
-            int centerIndex = (int)Math.Ceiling(arraysize);
-
-            int[] L = new int[centerIndex];
-            int[] R = new int[centerIndex];
-            for (int i = 0; i < centerIndex; i++)
+            if (input.Length == 1)
             {
-                L[i] = intarray[i];
-                R[i] = intarray[i + centerIndex];
+                return new TreeNode() { Val = input[0] };
             }
 
-            TreeNode newnode = new TreeNode()
+            Array.Sort(input);
+
+            int centerIndex;
+
+            if (input.Length % 2 == 1)
             {
-                Val = centerIndex,
-                Left = ArrayToBinarySearchTree(L),
-                Right = ArrayToBinarySearchTree(R)
-            };
+                centerIndex = input.Length / 2 + 1;
+            }
+            else
+            {
+                centerIndex = input.Length / 2;
+            }
 
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(newnode));
+            TreeNode node = new TreeNode() { Val = input[centerIndex] };
 
-            return newnode;
+            int[] left = new int[centerIndex];
+
+            int j = 0;
+
+            int[] right = new int[centerIndex];
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i < centerIndex)
+                {
+                    left[i] = input[i];
+                }
+                else if (i > centerIndex)
+                {
+                    right[j] = input[i];
+                    j++;
+                }
+            }
+
+            node.Left = ArrayToBinarySearchTree(left);
+
+            node.Right = ArrayToBinarySearchTree(right);
+
+            return node;
         }
 
         static public TreeNode DeleteNode(TreeNode node, int del)
@@ -226,9 +243,11 @@ namespace Trees
 
         static public TreeNode FindBranch(TreeNode node, int del)
         {
-            if(node.Val == del){
+            if (node.Val == del)
+            {
                 return node;
-            } else if (del < node.Val)
+            }
+            else if (del < node.Val)
             {
                 if (node.Left != null)
                 {
@@ -237,7 +256,8 @@ namespace Trees
             }
             else
             {
-                if(node.Right != null){
+                if (node.Right != null)
+                {
                     return FindBranch(node.Right, del);
                 }
             }
@@ -247,9 +267,10 @@ namespace Trees
 
         static public TreeNode AddBranch(TreeNode newlimb, TreeNode tree)
         {
-            if(newlimb.Val <= tree.Val)
+            if (newlimb.Val <= tree.Val)
             {
-                if(tree.Left != null) {
+                if (tree.Left != null)
+                {
                     tree.Left = AddBranch(newlimb, tree.Left);
                 }
                 else
@@ -274,11 +295,11 @@ namespace Trees
 
         public static TreeNode DeleteBranch(TreeNode node, int del)
         {
-            if(node.Val == del)
+            if (node.Val == del)
             {
                 return null;
             }
-            else if(del < node.Val)
+            else if (del < node.Val)
             {
                 if (node.Left != null)
                 {
@@ -287,7 +308,7 @@ namespace Trees
             }
             else
             {
-                if(node.Right != null)
+                if (node.Right != null)
                 {
                     return DeleteBranch(node.Right, del);
                 }
@@ -323,23 +344,24 @@ namespace Trees
             }
         }
 
-        public static int TotalLength(TreeNode node, int length) {
+        public static int TotalLength(TreeNode node, int length)
+        {
             length++;
 
             int leftLength = length;
             int rightLength = length;
 
-            if(node.Left != null)
+            if (node.Left != null)
             {
                 leftLength = TotalLength(node.Left, length);
             }
 
-            if(node.Right != null)
+            if (node.Right != null)
             {
                 rightLength = TotalLength(node.Right, length);
             }
 
-            if(leftLength >= rightLength)
+            if (leftLength >= rightLength)
             {
                 return (leftLength);
             }
