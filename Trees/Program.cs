@@ -21,30 +21,30 @@ namespace Trees
             root = ArrayToBinarySearchTree(array);
             root.BreadthFirst(new Queue<TreeNode>());
             Console.WriteLine("");
-            //Console.WriteLine("New tree looks like:");
-            //root = new TreeNode() { Val = 5 };
-            //root.AddToBST(4);
-            //root.AddToBST(1);
-            //root.AddToBST(2);
-            //root.AddToBST(40);
-            //root.AddToBST(31);
-            //root.AddToBST(7);
-            //root.AddToBST(10);
-            //root.AddToBST(22);
-            //Console.WriteLine("");
-            //root.BreadthFirst(new Queue<TreeNode>());
-            //Console.WriteLine("");
-            //Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
-            ////DeleteNode(root,10);
-            //Console.WriteLine("");
-            //root.BreadthFirst(new Queue<TreeNode>());
-            //Console.WriteLine("");
-            //Console.WriteLine("And now the 10 should be missing.");
+            Console.WriteLine("New tree looks like:");
+            root = new TreeNode() { Val = 5 };
+            root.AddToBST(4);
+            root.AddToBST(1);
+            root.AddToBST(2);
+            root.AddToBST(40);
+            root.AddToBST(31);
+            root.AddToBST(7);
+            root.AddToBST(10);
+            root.AddToBST(22);
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("That's not nearly as helpful as I imagined. I suppose use debug to see it in a more managable format?");
+            root = DeleteNode(root,10);
+            Console.WriteLine("");
+            root.BreadthFirst(new Queue<TreeNode>());
+            Console.WriteLine("");
+            Console.WriteLine("And now the 10 should be missing.");
             //Console.WriteLine("");
             //Console.WriteLine("The total length of this tree from head to head is:");
             //Console.WriteLine("");
             //Console.WriteLine(TotalLength(root));
-            //Console.WriteLine("");
+            Console.WriteLine("");
 
             Console.ReadLine();
         }
@@ -228,17 +228,50 @@ namespace Trees
             return node;
         }
 
-        static public TreeNode DeleteNode(TreeNode node, int del)
+        public static TreeNode DeleteNode(TreeNode input, int val)
         {
-            TreeNode limb = FindBranch(node, del);
+            if(input.Val == val)
+            {
+                if(input.Left != null)
+                {
+                    if(input.Right != null)
+                    {
+                        TreeNode limb = input.Right;
+                        input = input.Left;
+                        if(input.Right == null)
+                        {
+                            input.Right = limb;
+                        }
+                        else
+                        {
+                            AddBranch(limb, input.Right);
+                        }
+                    }
+                    else
+                    {
+                        input = input.Left;
+                    }
+                }
+                else if(input.Right != null)
+                {
+                    input = input.Right;
+                }
+                else
+                {
+                    input = null;
+                }
+            }
 
-            limb = AddBranch(limb.Left, limb.Right);
+            if(input.Left != null)
+            {
+                input.Left = DeleteNode(input.Left, val);
+            }
 
-            DeleteBranch(node, del);
-
-            AddBranch(limb, node);
-
-            return node;
+            if (input.Right != null)
+            {
+                input.Right = DeleteNode(input.Right, val);
+            }
+            return input;
         }
 
         static public TreeNode FindBranch(TreeNode node, int del)
