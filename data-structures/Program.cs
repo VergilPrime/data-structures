@@ -1,8 +1,9 @@
 ﻿using System;
 using datastructures.Classes;
 using Newtonsoft.Json;
-using datastructures.Classes.Animals;
+using datastructures.Classes;
 using System.Collections.Generic;
+using datastructures.Classes.Animals;
 
 namespace datastructures
 {
@@ -10,18 +11,27 @@ namespace datastructures
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Success Case");
-            string input = "((({{{}}})))";
-            Console.WriteLine(ParensCheck(input));
+            int[] array = new int[] { 1, 4, 1, 6, 2, 7, 2, 73, 7, 7, 3, 4, 1 };
+            CQueue customQueue = new CQueue();
+            CStack customStack = new CStack();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                customQueue.NQ(array[i]);
+                customStack.Push(array[i]);
+            }
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(customQueue.DQ());
+            }
             Console.WriteLine();
-
-            Console.WriteLine("Failure Case");
-            input = "(({({{}}})))";
-            Console.WriteLine(ParensCheck(input));
-
-            Console.Read();
-
-
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(customStack.Pop());
+            }
+            Console.WriteLine();
+            Console.ReadLine();
 
         }
 
