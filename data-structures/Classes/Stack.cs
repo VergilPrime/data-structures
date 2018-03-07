@@ -19,9 +19,11 @@ namespace datastructures.Classes
             return Head.Value;
         }
 
-        public void Pop()
+        public int Pop()
         {
+            int result = Head.Value;
             Head = Head.Next;
+            return result;
         }
     }
 }
