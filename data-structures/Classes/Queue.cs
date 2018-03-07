@@ -14,24 +14,27 @@ namespace datastructures.Classes
             Head = new Node { Value = Val, Next = Head };
         }
 
-        public Node Peek()
+        public int Peek()
         {
             Runner = Head;
             while (Runner.Next!= null)
             {
                 Runner = Runner.Next;
             }
-            return Runner;
+            return Runner.Value;
         }
 
-        public void DQ()
+        public int DQ()
         {
             Runner = Head;
             while (Runner.Next.Next != null)
             {
                 Runner = Runner.Next;
             }
+            int result = Runner.Next.Value;
             Runner.Next = null;
+            return result;
+
         }
     }
 }
