@@ -4,7 +4,7 @@ using System.Text;
 
 namespace datastructures.Classes
 {
-    public class Queue
+    public class CQueue
     {
         public Node Head { get; set; }
         public Node Runner { get; set; }
@@ -27,11 +27,18 @@ namespace datastructures.Classes
         public int DQ()
         {
             Runner = Head;
+            int result;
+            if (Runner.Next == null)
+            {
+                result = Runner.Value;
+                Runner = null;
+                return result;
+            }
             while (Runner.Next.Next != null)
             {
                 Runner = Runner.Next;
             }
-            int result = Runner.Next.Value;
+            result = Runner.Next.Value;
             Runner.Next = null;
             return result;
 

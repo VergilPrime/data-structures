@@ -4,7 +4,7 @@ using System.Text;
 
 namespace datastructures.Classes
 {
-    class Stack
+    class CStack
     {
         public Node Head { get; set; }
         public Node Runner { get; set; }
